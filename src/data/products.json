@@ -1,0 +1,212 @@
+[
+  {
+    "id": "1",
+    "name": "Product 1",
+    "price": 23,
+    "byWeight": false,
+    "stock": 60
+  },
+  {
+    "id": "2",
+    "name": "Product 2",
+    "price": 3,
+    "byWeight": true,
+    "stock": 22
+  },
+  {
+    "id": "3",
+    "name": "Product 3",
+    "price": 41,
+    "byWeight": false,
+    "stock": 55
+  },
+  {
+    "id": "4",
+    "name": "Product 4",
+    "price": 20,
+    "byWeight": false,
+    "stock": 93
+  },
+  {
+    "id": "5",
+    "name": "Product 5",
+    "price": 33,
+    "byWeight": false,
+    "stock": 14
+  },
+  {
+    "id": "6",
+    "name": "Product 6",
+    "price": 42,
+    "byWeight": false,
+    "stock": 51
+  },
+  {
+    "id": "7",
+    "name": "Product 7",
+    "price": 3,
+    "byWeight": false,
+    "stock": 75
+  },
+  {
+    "id": "8",
+    "name": "Product 8",
+    "price": 31,
+    "byWeight": false,
+    "stock": 14
+  },
+  {
+    "id": "9",
+    "name": "Product 9",
+    "price": 3,
+    "byWeight": false,
+    "stock": 39
+  },
+  {
+    "id": "10",
+    "name": "Product 10",
+    "price": 45,
+    "byWeight": true,
+    "stock": 86
+  },
+  {
+    "id": "11",
+    "name": "Product 11",
+    "price": 9,
+    "byWeight": true,
+    "stock": 94
+  },
+  {
+    "id": "12",
+    "name": "Product 12",
+    "price": 13,
+    "byWeight": false,
+    "stock": 88
+  },
+  {
+    "id": "13",
+    "name": "Product 13",
+    "price": 48,
+    "byWeight": true,
+    "stock": 56
+  },
+  {
+    "id": "14",
+    "name": "Product 14",
+    "price": 16,
+    "byWeight": true,
+    "stock": 32
+  },
+  {
+    "id": "15",
+    "name": "Product 15",
+    "price": 39,
+    "byWeight": true,
+    "stock": 91
+  },
+  {
+    "id": "16",
+    "name": "Product 16",
+    "price": 50,
+    "byWeight": true,
+    "stock": 46
+  },
+  {
+    "id": "17",
+    "name": "Product 17",
+    "price": 1,
+    "byWeight": false,
+    "stock": 10
+  },
+  {
+    "id": "18",
+    "name": "Product 18",
+    "price": 17,
+    "byWeight": true,
+    "stock": 51
+  },
+  {
+    "id": "19",
+    "name": "Product 19",
+    "price": 25,
+    "byWeight": true,
+    "stock": 45
+  },
+  {
+    "id": "20",
+    "name": "Product 20",
+    "price": 38,
+    "byWeight": true,
+    "stock": 66
+  },
+  {
+    "id": "21",
+    "name": "Product 21",
+    "price": 42,
+    "byWeight": false,
+    "stock": 85
+  },
+  {
+    "id": "22",
+    "name": "Product 22",
+    "price": 40,
+    "byWeight": true,
+    "stock": 14
+  },
+  {
+    "id": "23",
+    "name": "Product 23",
+    "price": 50,
+    "byWeight": false,
+    "stock": 46
+  },
+  {
+    "id": "24",
+    "name": "Product 24",
+    "price": 24,
+    "byWeight": false,
+    "stock": 68
+  },
+  {
+    "id": "25",
+    "name": "Product 25",
+    "price": 1,
+    "byWeight": true,
+    "stock": 48
+  },
+  {
+    "id": "26",
+    "name": "Product 26",
+    "price": 23,
+    "byWeight": false,
+    "stock": 30
+  },
+  {
+    "id": "27",
+    "name": "Product 27",
+    "price": 40,
+    "byWeight": false,
+    "stock": 33
+  },
+  {
+    "id": "28",
+    "name": "Product 28",
+    "price": 48,
+    "byWeight": true,
+    "stock": 48
+  },
+  {
+    "id": "29",
+    "name": "Product 29",
+    "price": 36,
+    "byWeight": true,
+    "stock": 55
+  },
+  {
+    "id": "30",
+    "name": "Product 30",
+    "price": 1,
+    "byWeight": true,
+    "stock": 54
+  }
+]

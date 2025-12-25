@@ -1,0 +1,14 @@
+[
+  {
+    "id": "bonus50",
+    "value": 50
+  },
+  {
+    "id": "bonus100",
+    "value": 100
+  },
+  {
+    "id": "bonus200",
+    "value": 200
+  }
+]
