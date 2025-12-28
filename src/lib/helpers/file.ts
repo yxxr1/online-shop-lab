@@ -7,3 +7,13 @@ export const loadJsonFile = (filePath: string) => {
     return undefined;
   }
 }
+
+export const writeFileSyncDebounced = (filePath: string, delay = 1000) => {
+  let timer: NodeJS.Timeout;
+
+  return (data: object) => {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => fs.writeFileSync(filePath, JSON.stringify(data)), delay);
+  };
+}

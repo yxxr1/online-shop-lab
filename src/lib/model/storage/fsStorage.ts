@@ -1,18 +1,19 @@
-import fs from 'fs';
 import {MemoryStorage} from "@/lib/model/storage/memoryStorage";
-import {loadJsonFile} from "@/lib/helpers/file";
+import {loadJsonFile, writeFileSyncDebounced} from "@/lib/helpers/file";
 import {BaseData} from "@/lib/model/storage/baseStorage";
 
 export class FSStorage<T extends BaseData> extends MemoryStorage<T> {
   _filePath: string;
+  _writeFileDebounced: ReturnType<typeof writeFileSyncDebounced>;
 
   constructor(filePath: string) {
     super(loadJsonFile(filePath));
     this._filePath = filePath;
+    this._writeFileDebounced = writeFileSyncDebounced(filePath);
   }
 
   _writeFile() {
-    fs.writeFileSync(this._filePath, JSON.stringify(this._data));
+    this._writeFileDebounced(this._data);
   }
 
   addData(data: T) {
