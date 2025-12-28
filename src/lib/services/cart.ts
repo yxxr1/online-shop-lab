@@ -17,6 +17,7 @@ class CartService {
     const cart = this.cartModel.getDataById(id);
 
     if (!cart) {
+      // создание корзины для пользователя
       const data = {
         id,
         cart: [{ productId, quantity: weightOrCount }]
@@ -29,9 +30,11 @@ class CartService {
     const productItemIndex = newCart.findIndex((item) => item.productId === productId);
 
     if (productItemIndex !== -1) {
+      // увеличение количества продукта в корзине
       const productItem = newCart[productItemIndex];
       newCart[productItemIndex] = { ...productItem, quantity: numToFixed(productItem.quantity + weightOrCount) }
     } else {
+      // добавление продукта в корзину
       const newItem = { productId, quantity: weightOrCount };
       newCart.push(newItem);
     }
@@ -48,13 +51,16 @@ class CartService {
 
     const productItemIndex = data.cart.findIndex((item) => item.productId === productId);
 
+    // если удаляемый продукт есть в корзине
     if (productItemIndex !== -1) {
       const newCart = [...data.cart];
       const productItem = newCart[productItemIndex];
 
       if (productItem.quantity - weightOrCount <= 0) {
+        // убрать продукт из корзины
         newCart.splice(productItemIndex, 1);
       } else {
+        // уменьшить количество в корзине
         newCart[productItemIndex] = { ...productItem, quantity: numToFixed(productItem.quantity - weightOrCount) };
       }
 
@@ -85,6 +91,7 @@ class CartService {
 
     const product = this.productsModel.getDataById(productId);
     const quantity = product?.byWeight ? weightOrCount : Math.floor(weightOrCount);
+    // обработка ситуации если в корзине меньше чем нужно убрать
     const stockChange = Math.min(cartProduct.quantity, quantity);
 
     // транзакция
@@ -92,6 +99,7 @@ class CartService {
     return this._removeFromCart(id, productId, quantity);
   }
 
+  // считает стоимость всех товаров в корзине
   getCartValue(cartId: string): number | undefined {
     const cart = this.cartModel.getDataById(cartId);
 

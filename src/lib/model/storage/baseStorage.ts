@@ -2,6 +2,7 @@ export interface BaseData {
   id: string;
 }
 
+// абстракция хранилища
 export abstract class BaseStorage<T extends BaseData> {
   abstract getAllData(): T[];
   abstract getDataById(searchId: BaseData['id']): T | undefined;
