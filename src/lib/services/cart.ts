@@ -13,13 +13,13 @@ class CartService {
     this.productsModel = productsModel;
   }
 
-  _addToCart(id: string, productId: string, weightOrCount: number): UserCart | undefined {
-    const cart = this.cartModel.getDataById(id);
+  _addToCart(cartId: string, productId: string, weightOrCount: number): UserCart | undefined {
+    const cart = this.cartModel.getDataById(cartId);
 
     if (!cart) {
       // создание корзины для пользователя
       const data = {
-        id,
+        id: cartId,
         cart: [{ productId, quantity: weightOrCount }]
       };
 
@@ -39,11 +39,11 @@ class CartService {
       newCart.push(newItem);
     }
 
-    return this.cartModel.updateDataById(id, { cart: newCart });
+    return this.cartModel.updateDataById(cartId, { cart: newCart });
   }
 
-  _removeFromCart(id: string, productId: string, weightOrCount: number): UserCart | undefined {
-    const data = this.cartModel.getDataById(id);
+  _removeFromCart(cartId: string, productId: string, weightOrCount: number): UserCart | undefined {
+    const data = this.cartModel.getDataById(cartId);
 
     if (!data) {
       return;
@@ -64,11 +64,11 @@ class CartService {
         newCart[productItemIndex] = { ...productItem, quantity: numToFixed(productItem.quantity - weightOrCount) };
       }
 
-      return this.cartModel.updateDataById(id, { cart: newCart });
+      return this.cartModel.updateDataById(cartId, { cart: newCart });
     }
   }
 
-  addToCart(id: string, productId: string, weightOrCount: number): UserCart | undefined {
+  addToCart(cartId: string, productId: string, weightOrCount: number): UserCart | undefined {
     const product = this.productsModel.getDataById(productId);
 
     if (!product || product.stock < weightOrCount) {
@@ -78,11 +78,11 @@ class CartService {
     const quantity = product.byWeight ? weightOrCount : Math.floor(weightOrCount);
     // транзакция
     this.productsModel.updateDataById(productId, { stock: numToFixed(product.stock - quantity) });
-    return this._addToCart(id, productId, quantity);
+    return this._addToCart(cartId, productId, quantity);
   }
 
-  removeFromCart(id: string, productId: string, weightOrCount: number): UserCart | undefined {
-    const cart = this.cartModel.getDataById(id);
+  removeFromCart(cartId: string, productId: string, weightOrCount: number): UserCart | undefined {
+    const cart = this.cartModel.getDataById(cartId);
     const cartProduct = (cart?.cart || []).find((item) => item.productId === productId);
 
     if (!cartProduct) {
@@ -96,7 +96,7 @@ class CartService {
 
     // транзакция
     this.productsModel.updateDataById(productId, { stock: numToFixed((product?.stock || 0) + stockChange) });
-    return this._removeFromCart(id, productId, quantity);
+    return this._removeFromCart(cartId, productId, quantity);
   }
 
   // считает стоимость всех товаров в корзине

@@ -50,9 +50,9 @@ class OrderService {
     return { bonusToPay, bonusChange, newBonusValue: numToFixed(bonus.value + bonusChange) };
   }
 
-  createOrder(userSession: string, personalData: PersonalData, paymentCard?: string, bonusCard?: string, bonusValue?: number): Order | undefined {
-    const cart = this.cartModel.getDataById(userSession)?.cart;
-    const cartSum = cartService.getCartValue(userSession);
+  createOrder(userId: string, personalData: PersonalData, paymentCard?: string, bonusCard?: string, bonusValue?: number): Order | undefined {
+    const cart = this.cartModel.getDataById(userId)?.cart;
+    const cartSum = cartService.getCartValue(userId);
 
     if (!cart?.length || cartSum === undefined) {
       throw new Error("Корзина пуста");
@@ -72,10 +72,10 @@ class OrderService {
     // проверка что бонусы не начислятся если заказ не оплачен
     const shouldBonusChange = isPaid || bonusChange < 0;
     if (bonusCard && shouldBonusChange) this.bonusModel.updateDataById(bonusCard, { value: newBonusValue });
-    this.cartModel.deleteDataById(userSession);
+    this.cartModel.deleteDataById(userId);
     return this.orderModel.addData({
       id: uuidv4(),
-      userId: userSession,
+      userId,
       personalData,
       cart,
       paymentInfo: {
@@ -117,10 +117,10 @@ class OrderService {
     throw new Error("Несуществующий заказ");
   }
 
-  cancelOrder(userSession: string, orderId: string): Order | undefined {
+  cancelOrder(userId: string, orderId: string): Order | undefined {
     const order = this.orderModel.getDataById(orderId);
 
-    if (order && order.userId === userSession) {
+    if (order && order.userId === userId) {
       const { paymentInfo } = order;
 
       // транзакция

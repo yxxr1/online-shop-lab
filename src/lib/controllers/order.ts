@@ -42,7 +42,6 @@ export const payOrder = async (orderId: string, paymentCard: string): Promise<{ 
     throw new Error("incorrect args");
   }
 
-
   try {
     orderService.payOrder(orderId, paymentCard);
     refresh();
