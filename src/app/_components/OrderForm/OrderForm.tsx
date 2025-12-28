@@ -53,14 +53,20 @@ export const OrderForm: React.FC<Props> = ({ sum, getBonusValue }) => {
     }
   }
 
+  // сумма к оплате с учетом бонусов
   const summarySum = numToFixed(sum-bonusValue);
+  // максимально можно потратить бонусов: все бонусы или вся стоимость заказа
   const maxBonusSum = Math.min(bonusCardValue || 0, sum);
 
   useEffect(() => {
+    // если товар удаляется из корзины - контроллер вызывает ререндер страницы
+    // при этом проп sum меняется и на клиенте нужно поправить значение в поле
+    // потраченных бонусов
     setBonusValue(Math.min(bonusValue, sum));
   }, [sum]);
   useEffect(() => {
-    if (!summarySum) {
+    // если сумма заказа с бонусами равна 0 - убрать чекбокс оплаты (заказ оплачен бонусами)
+    if (summarySum === 0) {
       setIsPay(false);
     }
   }, [summarySum]);

@@ -37,12 +37,14 @@ class OrderService {
       throw new Error('Несуществующая бонусная карта');
     }
 
+    // чтобы не потратить больше бонусов чем стоимость заказа
     const bonusToPay = Math.min(bonusValue || 0, cartSum);
 
     if (bonus.value < bonusToPay) {
       throw new Error('Недостаточно бонусов на карте');
     }
 
+    // списание либо начисление бонусов
     const bonusChange = bonusToPay > 0 ? -bonusToPay : Math.floor(cartSum * ACCRUE_BONUS_PERCENT);
 
     return { bonusToPay, bonusChange, newBonusValue: numToFixed(bonus.value + bonusChange) };
@@ -61,6 +63,7 @@ class OrderService {
     }
 
     const { bonusToPay, bonusChange, newBonusValue } = this._calcBonus(cartSum, bonusCard, bonusValue);
+    // сумма заказа минус сумма бонусов
     const sumToPay = numToFixed(cartSum - bonusToPay);
 
     // транзакция
@@ -85,6 +88,7 @@ class OrderService {
     });
   }
 
+  // оплата созданного заказа
   payOrder(orderId: string, paymentCard: string) {
     const order = this.orderModel.getDataById(orderId);
 
@@ -101,6 +105,7 @@ class OrderService {
         throw new Error("Ошибка платежа");
       }
 
+      // заказ становится оплаченным и нужно начислить бонусы
       const shouldBonusChange = bonusChange > 0;
       const bonus = shouldBonusChange && bonusCard && this.bonusModel.getDataById(bonusCard);
 

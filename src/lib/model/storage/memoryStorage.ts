@@ -1,5 +1,6 @@
 import {BaseData, BaseStorage} from "@/lib/model/storage/baseStorage";
 
+// реализует логику хранения данных в памяти
 export abstract class MemoryStorage<T extends BaseData> extends BaseStorage<T> {
   _data: T[];
 
@@ -20,7 +21,7 @@ export abstract class MemoryStorage<T extends BaseData> extends BaseStorage<T> {
 
     return data;
   }
-  // находит запись с переданным id, обновляет переданные поля
+
   updateDataById(updateId: string, updateData: Partial<Omit<T, "id">>): T | undefined {
     const index = this._data.findIndex(({ id }) => updateId === id);
 

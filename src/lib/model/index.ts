@@ -12,6 +12,7 @@ const paymentCards = loadJsonFile(path.join(process.cwd(), "src", "data", "payme
 const cartPath = path.join(process.cwd(), "src", "data", "cart.json");
 const orderPath = path.join(process.cwd(), "src", "data", "orders.json");
 
+// настройка используемого адаптера хранилища для конкретной модели
 export const productsModel = new FSProductsModel(productsPath);
 export const bonusModel = new FSBonusModel(bonusCardsPath);
 export const paymentModel = new MemoryPaymentModel(paymentCards);

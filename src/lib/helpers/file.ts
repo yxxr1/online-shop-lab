@@ -8,6 +8,7 @@ export const loadJsonFile = (filePath: string) => {
   }
 }
 
+// обертка над writeFileSync, запись в файл делается 1 раз для всех вызовов между которыми прошло меньше delay миллисекунд
 export const writeFileSyncDebounced = (filePath: string, delay = 1000) => {
   let timer: NodeJS.Timeout;
 

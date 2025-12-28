@@ -2,6 +2,7 @@ import {MemoryStorage} from "@/lib/model/storage/memoryStorage";
 import {loadJsonFile, writeFileSyncDebounced} from "@/lib/helpers/file";
 import {BaseData} from "@/lib/model/storage/baseStorage";
 
+// дополняет MemoryStorage синхронизацией данных в файл
 export class FSStorage<T extends BaseData> extends MemoryStorage<T> {
   _filePath: string;
   _writeFileDebounced: ReturnType<typeof writeFileSyncDebounced>;
